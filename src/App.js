@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes, Link } from 'react-router-dom'
+import { Home } from "./components/Home"
+import { NotFound } from './components/NotFound'
+import { BookLayout } from './BookLayout'
+import { BookRoutes } from './BookRoutes'
+import { NewBook } from './components/NewBook'
+import { Magazines } from './components/Magazines'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    
+    <>
+    {/* <Routes location="/books">
+    
+      <Route path="/books" element={<h1>Extra Content</h1>} ></Route>
+    </Routes> */}
+    <h1>Things for sale</h1>
+    <nav>
+   
+      <ul>
+        <li>
+          <Link to="/Home">Home</Link>
+          </li>
+          <li>
+          <Link to="/Books">Books</Link>
+          </li>
+          <li>
+          <Link to="/Magazines">Magazines</Link>
+          </li>
+      </ul>
+    </nav>
+    <Routes>
+      <Route path="/Home" element={<Home />} />
+      <Route path="/Books/*" element={<BookRoutes />}  />
+      <Route path="/Magazines/*" element={<Magazines />}  />
+   
+    </Routes> 
+
+    </>
+  )
 }
 
 export default App;
