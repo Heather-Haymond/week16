@@ -1,22 +1,29 @@
+import React, { useState } from 'react'
+import TopBar from './components/TopBar'
 import { Route, Routes, Link } from 'react-router-dom'
-import { Home } from "./components/Home"
-import { NotFound } from './components/NotFound'
-import { BookLayout } from './BookLayout'
+import  Home  from "./components/Home"
+//import { NotFound } from './components/NotFound'
+//import { BookLayout } from './BookLayout'
 import { BookRoutes } from './BookRoutes'
-import { NewBook } from './components/NewBook'
+//import { NewBook } from './components/NewBook'
 import { Magazines } from './components/Magazines'
+// import SearchResultsPage from './components/SearchResultsPage'
+import { TEST_BOOKS } from './FAKE_DATA'
+import BookDetailsPage from './components/BookDetailPage'
+import BookCard from './components/BookCard'
 
-function App() {
+export default function App() {
+// const [bookList] = useState(TEST_BOOKS)
   return (
-    
+
     <>
     {/* <Routes location="/books">
-    
+
       <Route path="/books" element={<h1>Extra Content</h1>} ></Route>
     </Routes> */}
-    <h1>Things for sale</h1>
+    <h1>Book</h1>
     <nav>
-   
+
       <ul>
         <li>
           <Link to="/Home">Home</Link>
@@ -29,15 +36,20 @@ function App() {
           </li>
       </ul>
     </nav>
-    <Routes>
-      <Route path="/Home" element={<Home />} />
-      <Route path="/Books/*" element={<BookRoutes />}  />
-      <Route path="/Magazines/*" element={<Magazines />}  />
-   
-    </Routes> 
+  
+    <TopBar />
+      <Routes>
+        {/* <Route path="/" element={ <Home bookList={bookList} />} /> */}
+        <Route path="/Books/*" element={<BookRoutes />}  />
+        <Route path="/Magazines/*" element={<Magazines />}  />
+        
+        {/* <Route path="/Search" element={<SearchResultsPage bookList={bookList} />} />
+        <Route path="/search/:searchQuery" element={ <SearchResultsPage bookList={bookList}/> }/>
+        <Route path="/book/:bookId" element={ <BookDetailsPage bookList={bookList}/> }/> */}
+       </Routes>
 
     </>
   )
 }
 
-export default App;
+
