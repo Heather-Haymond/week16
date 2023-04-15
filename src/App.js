@@ -4,13 +4,14 @@ import { Route, Routes, Link } from 'react-router-dom'
 import  Home  from "./components/Home"
 //import { NotFound } from './components/NotFound'
 //import { BookLayout } from './BookLayout'
-import { BookRoutes } from './BookRoutes'
+// import {  } from './BookRoutes'
 //import { NewBook } from './components/NewBook'
 import { Magazines } from './components/Magazines'
 // import SearchResultsPage from './components/SearchResultsPage'
 import BookDetailPage from './components/BookDetailPage'
 import BookCard from './components/BookCard'
 import { Cart } from './components/Cart'
+import { Book } from './components/Book'
 export default function App() {
 // const [bookList] = useState(TEST_BOOKS)
   return (
@@ -44,7 +45,7 @@ export default function App() {
     {/* nav bar */}
       <Routes>
         {/* <Route path="/" element={ <Home bookList={bookList} />} /> */}
-        <Route path="/Books/*" element={<BookRoutes />}  />
+        <Route path="/Books/*" element={<Book />}  />
         <Route path="/Magazines/*" element={<Magazines />}  />
         <Route path="/Cart/*" element={<Cart />} />
         

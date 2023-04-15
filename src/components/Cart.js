@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 export function Cart() {
     const [books, setBooks] = useState([]);
     const [cart, setCart] = useState([]);
+    // useEffect to fetch books from an external API and set them to the state
+  useEffect(() => {
+    fetch('https://642725c4161067a83bf6687e.mockapi.io')
+      .then(response => response.json())
+      .then(data => setBooks(data))
+      .catch(error => console.error(error));
+  }, []);
     // const obj = useOutletContext()
     // function to remove a book from the cart
   const handleRemoveFromCart = book => {
