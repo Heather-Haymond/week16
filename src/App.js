@@ -8,10 +8,9 @@ import { BookRoutes } from './BookRoutes'
 //import { NewBook } from './components/NewBook'
 import { Magazines } from './components/Magazines'
 // import SearchResultsPage from './components/SearchResultsPage'
-import { TEST_BOOKS } from './FAKE_DATA'
-import BookDetailsPage from './components/BookDetailPage'
+import BookDetailPage from './components/BookDetailPage'
 import BookCard from './components/BookCard'
-
+import { Cart } from './components/Cart'
 export default function App() {
 // const [bookList] = useState(TEST_BOOKS)
   return (
@@ -34,14 +33,20 @@ export default function App() {
           <li>
           <Link to="/Magazines">Magazines</Link>
           </li>
+          <li>
+          <Link to="/Cart">Cart </Link>
+          </li>
+          
       </ul>
     </nav>
   
-    <TopBar />
+    <TopBar /> 
+    {/* nav bar */}
       <Routes>
         {/* <Route path="/" element={ <Home bookList={bookList} />} /> */}
         <Route path="/Books/*" element={<BookRoutes />}  />
         <Route path="/Magazines/*" element={<Magazines />}  />
+        <Route path="/Cart/*" element={<Cart />} />
         
         {/* <Route path="/Search" element={<SearchResultsPage bookList={bookList} />} />
         <Route path="/search/:searchQuery" element={ <SearchResultsPage bookList={bookList}/> }/>
