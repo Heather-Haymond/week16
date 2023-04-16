@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
+import { ReviewList } from './ReviewList';
+import { ReviewForm } from './ReviewForm';
 // import bookCover from "../assets/book-cover.webp"
 // import styles from "./BookDetailsPage.module.css"
 export default function BookDetailsPage({ bookList }) {
@@ -21,8 +23,13 @@ export default function BookDetailsPage({ bookList }) {
                 {/* <img src={bookCover} className={styles.bookImage}/> */}
             </Col>
             <Col>
-                <h4>{ book.title }</h4>ß
+            <h4>{book.title}</h4>
+                <p>{book.author}</p>
+                <p>{book.description}</p>
+                <ReviewList reviews={book.reviews} />
+                <ReviewForm book={book} />
             </Col>
         </Row>
     )
 }
+
