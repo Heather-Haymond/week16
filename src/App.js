@@ -12,6 +12,9 @@ import BookDetailPage from './components/BookDetailPage'
 import BookCard from './components/BookCard'
 import { Cart } from './components/Cart'
 import { Book } from './components/Book'
+import { Review } from './components/Review'
+import { ReviewForm } from './components/ReviewForm'
+import { ReviewList } from './components/ReviewList'
 export default function App() {
 // const [bookList] = useState(TEST_BOOKS)
   return (
@@ -37,6 +40,15 @@ export default function App() {
           <li>
           <Link to="/Cart">Cart </Link>
           </li>
+          <li>
+          <Link to="/Review">Reviews </Link>
+          </li>
+          <li>
+          <Link to="/ReviewForm">Add Review</Link>
+          </li>
+          <li>
+          <Link to="/ReviewList">Review List</Link>
+          </li>
           
       </ul>
     </nav>
@@ -48,7 +60,9 @@ export default function App() {
         <Route path="/Books/*" element={<Book />}  />
         <Route path="/Magazines/*" element={<Magazines />}  />
         <Route path="/Cart/*" element={<Cart />} />
-        
+        <Route path="/Review/*" element={<Cart />} />
+        <Route path="/ReviewForm/*" element={<Cart />} />
+        <Route path="/ReviewList/*" element={<Cart />} />
         {/* <Route path="/Search" element={<SearchResultsPage bookList={bookList} />} />
         <Route path="/search/:searchQuery" element={ <SearchResultsPage bookList={bookList}/> }/>
         <Route path="/book/:bookId" element={ <BookDetailsPage bookList={bookList}/> }/> */}
