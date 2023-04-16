@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Stars from "./Stars";
  // Define ReviewForm component as a function that takes onReviewSubmit prop
-const ReviewForm = ({ addReview }) => {
+export function ReviewForm({ addReview }) {
   // Use useState hook to declare reviewText state variable and setReviewText function
   const [reviewText, setReviewText] = useState("");
   // Define handleSubmit function that takes an event as a parameter
@@ -22,13 +22,11 @@ const ReviewForm = ({ addReview }) => {
       <textarea
         value={reviewText}
         onChange={(event) => setReviewText(event.target.value)} // Update the review text state as the user types
-        placeholder="Write your review here..."
+        placeholder="Write your book review here..."
         required // Make the textarea a required field
       />
       <Stars rating={rating} setRating={setRating} /> {/* Add the Stars component with the rating and setRating props */}
       <button type="submit">Submit</button>
     </form>
   );
-};
-// Export the ReviewForm component
-export default ReviewForm;
+}

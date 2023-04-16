@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-export function Magazine() {
+export function Magazines() {
     const [magazine, setMagazines] = useState([]);
     const [cart, setCart] = useState([]);
     
     // useEffect to fetch books from an external API and set them to the state
     useEffect(() => {
-      fetch('https://642725c4161067a83bf6687e.mockapi.io/Books')
+      fetch('https://642725c4161067a83bf6687e.mockapi.io/Magazines')
         .then(response => response.json())
         .then(data => setMagazines(data))
         .catch(error => alert(error));
@@ -23,7 +23,7 @@ export function Magazine() {
   const handleSubmit = e => {
     e.preventDefault();
     const newMagazines = {
-      Title: books
+        name: e.value
     };
     //spread operater to st values of books
     setMagazines(prevMagazines => [...prevMagazines, newMagazines]);

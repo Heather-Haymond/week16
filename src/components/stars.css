@@ -1,0 +1,33 @@
+.star-checkboxes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .star-checked {
+    color: gold;
+  }
+
+  .star-unchecked {
+    color: lightgray;
+  }
+
+  .star-checkbox input[type='checkbox'] {
+    display: none;
+  }
+
+  .star-checkbox label::before {
+    content: '★';
+    opacity: 0.3;
+  }
+
+  .star-checkbox label:hover::before,
+  .star-checkbox label:hover ~ label::before,
+  .star-checkbox input[type='checkbox']:checked ~ label::before {
+    opacity: 1;
+  }
+
+  .star-checkbox label:hover,
+  .star-checkbox input[type='checkbox']:checked ~ label {
+    color: gold;
+  }
