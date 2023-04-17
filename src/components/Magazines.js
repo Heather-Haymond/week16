@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 export function Magazines() {
-    const [magazine, setMagazines] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [magazines, setMagazines] = useState([]);
+    // const [cart, setCart] = useState([]);
+    const [magazineName, setMagazineName] = useState ('')
     
     // useEffect to fetch books from an external API and set them to the state
     useEffect(() => {
@@ -12,29 +14,39 @@ export function Magazines() {
     }, []);
   
     // function to add a book to the cart
-    const handleAddToCart = magazine => {
-      setCart(prevCart => [...prevCart, magazine]);
-    };
+    // const handleAddToCart = magazine => {
+    //   setCart(prevCart => [...prevCart, magazine]);
+    // };
   // function to delete 
   const handleDelete = id => {
+    fetch ("https://642725c4161067a83bf6687e.mockapi.io/Magazines/"+id,{method:"DELETE"})
     setMagazines(prevMagazines => prevMagazines.filter(p => p.id !== id));
   };
   //function that adds btn
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const newMagazines = {
-        name: e.value
+        title: magazineName
+
     };
+    const response = await fetch ("https://642725c4161067a83bf6687e.mockapi.io/Magazines",{
+        method:"POST", 
+        headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newMagazines),
+    })
+    const createdMagazine = await response.json()
     //spread operater to st values of books
-    setMagazines(prevMagazines => [...prevMagazines, newMagazines]);
-    setCart('');
+    setMagazines(prevMagazines => [...prevMagazines, createdMagazine]);
+    setMagazineName('');
   };
 
     // function to remove a book from the cart
-    const handleRemoveFromCart = magazine => {
-      setCart(prevCart => prevCart.filter(b => b.id !== magazine.id));
-    };
-    const { id } = useParams()
+    // const handleRemoveFromCart = magazine => {
+    //   setCart(prevCart => prevCart.filter(b => b.id !== magazine.id));
+    // };
+    // const { id } = useParams()
     // const obj = useOutletContext()
     return (
         <div>
@@ -42,17 +54,18 @@ export function Magazines() {
         <form onSubmit={handleSubmit}>
           <label>
             Add a new Magazine:
-            <input type="text" value={magazine} onChange={e => setCart(e.target.value)} />
+            <input type="text" value={magazineName} onChange={e => setMagazineName(e.target.value)} />
           </label>
           <button type="submit">Add</button>
         </form>
         <ul>
           {magazines.map((magazine) => ( //iterates
             <li key={magazine.id}>
-            <img src={magazine.CoverImage} alt={magazine.Title} />
-            <h2>{magazine.Title}</h2>
-            <p>by {magazine.Author}</p>
-            <p>Publisher: {magazine.Publisher}</p>
+            <img src={magazine.coverImage} alt={magazine.title} />
+            <h2>{magazine.title}</h2>
+            <p>by {magazine.author}</p>
+            <p>Publisher: {magazine.publisher}</p>
+            <button onClick={() => handleDelete(magazine.id)}>Delete</button>
           </li>
           ))}
         </ul>
