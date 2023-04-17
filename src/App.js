@@ -10,7 +10,7 @@ import { Magazines } from './components/Magazines'
 // import SearchResultsPage from './components/SearchResultsPage'
 import BookDetailPage from './components/BookDetailPage'
 import BookCard from './components/BookCard'
-import { Cart } from './components/Cart'
+// import { Cart } from './components/Cart'
 import { Book } from './components/Book'
 import { Review } from './components/Review'
 import { ReviewForm } from './components/ReviewForm'
@@ -37,7 +37,7 @@ export default function App() {
           <li>
           <Link to="/Magazines">Magazines</Link>
           </li>
-          <li>
+          {/* <li>
           <Link to="/Cart">Cart </Link>
           </li>
           <li>
@@ -48,7 +48,7 @@ export default function App() {
           </li>
           <li>
           <Link to="/ReviewList">Review List</Link>
-          </li>
+          </li> */}
           
       </ul>
     </nav>
@@ -59,10 +59,10 @@ export default function App() {
         {/* <Route path="/" element={ <Home bookList={bookList} />} /> */}
         <Route path="/Books/*" element={<Book />}  />
         <Route path="/Magazines/*" element={<Magazines />}  />
-        <Route path="/Cart/*" element={<Cart />} />
+        {/* <Route path="/Cart/*" element={<Cart />} />
         <Route path="/Review/*" element={<Cart />} />
         <Route path="/ReviewForm/*" element={<Cart />} />
-        <Route path="/ReviewList/*" element={<Cart />} />
+        <Route path="/ReviewList/*" element={<Cart />} /> */}
         {/* <Route path="/Search" element={<SearchResultsPage bookList={bookList} />} />
         <Route path="/search/:searchQuery" element={ <SearchResultsPage bookList={bookList}/> }/>
         <Route path="/book/:bookId" element={ <BookDetailsPage bookList={bookList}/> }/> */}
