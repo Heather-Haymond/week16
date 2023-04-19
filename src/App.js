@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import TopBar from './components/TopBar'
 import { Route, Routes, Link } from 'react-router-dom'
 import  Home  from "./components/Home"
