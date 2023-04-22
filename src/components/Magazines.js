@@ -64,11 +64,6 @@ getMagazines()  // set book to state
       },
       body: JSON.stringify(newMagazines),
     })
-
-    
-    // const createdBook = await response.json()
-    //spread operater to st values of books
-    // setBooks(prevBooks => [...prevBooks, createdBook]);
     
     // reset input value for:
     setMagazineName('');
@@ -95,18 +90,7 @@ getMagazines()  // set book to state
     });
     getMagazines() //calls the getBooks function to update new data
     };
-//     const createdMagazine = await response.json()
     
-//     setMagazines(prevMagazines => [...prevMagazines, createdMagazine]);
-//     setMagazineName('');
-//   };
-
-    // function to remove a book from the cart
-    // const handleRemoveFromCart = magazine => {
-    //   setCart(prevCart => prevCart.filter(b => b.id !== magazine.id));
-    // };
-    // const { id } = useParams()
-    // const obj = useOutletContext()
     return (
         <div>
         <h1>Magazine</h1>
@@ -116,28 +100,40 @@ getMagazines()  // set book to state
             <input type="text" value={magazineName} onChange={e => setMagazineName(e.target.value)} />
           </label>
           <label>
-Cover Image URL:
-            <input type="text" value={magazineCoverImage} onChange={e => setMagazineCoverImage(e.target.value)} /> sets up an input field for the magazine image URL and updates the bookCoverImage state when the input changes
+          Authors:
+            <input type="text" value={MagazineAuthor} onChange={e => setMagazineAuthor(e.target.value)} /> 
           </label>
-          <Button variant="warning" onClick={() => handleUpdate(magazines.id,updatedMagazineName,updatedMagazineCoverImage)}>Edit</Button> 
+            <label>
+            Publisher:
+          <input type="text" value={magazinePublisher} onChange={e => setMagazinePublisher(e.target.value)} /> 
+          </label>
+          <label>
+            Cover Image URL:
+            <input type="text" value={magazineCoverImage} onChange={e => setMagazineCoverImage(e.target.value)} /> 
+          </label>
+          <Button type="submit" variant="primary">add</Button>
         </form>
         <ul>
           {magazines.reverse().map((magazine) => ( //iterates
             <li key={magazine.id}>
           <Card style={{ width: '18rem' }}>
-            <Card.Img src={magazine.CoverImage} alt={magazine.Title} /> //displays the book cover image
+            <Card.Img src={magazine.CoverImage} alt={magazine.Title} /> 
             <h2>{magazine.Title}</h2>
             <p>by {magazine.Author}</p>
             <p>Publisher: {magazine.Publisher}</p> 
-            <Button variant="danger" onClick={() => handleDelete(magazine.id)}>Delete</Button> {/*a button to delete the current book*/}
-            <form onSubmit={handleSubmit}>//form with onSubmit handler that updates book data
+            <Button variant="danger" onClick={() => handleDelete(magazine.id)}>Delete</Button> {/*a button to delete the current magazine*/}
+            <form onSubmit={handleSubmit}>
             <label>
-                Updade a Magazine:
-                <input type="text" value={updatedMagazineName} onChange={e => setUpdatedMagazineName(e.target.value)} />
-                cover Image URL:
-                <input type="text" value={updatedMagazineCoverImage} onChange={e => setUpdatedMagazineCoverImage(e.target.value)} />
+                Update Title:
+                <input type="text" value={updatedMagazineName} onChange={e => setUpdatedMagazineName(e.target.value)} /> <br />
+                Authors:
+                <input type="text" value={MagazineAuthor} onChange={e => setMagazineAuthor(e.target.value)} /> <br />
+                Publisher:
+                <input type="text" value={magazinePublisher} onChange={e => setMagazinePublisher(e.target.value)} /> <br />
+                cover Image:
+                <input type="text" value={updatedMagazineCoverImage} onChange={e => setUpdatedMagazineCoverImage(e.target.value)} /> <br />
                 </label>
-                <Button variant="warning" onClick={() => handleUpdate(magazine.id,updatedMagazineName,updatedMagazineCoverImage)}>Edit</Button> {/*a button to update the current book*/}
+                <Button variant="warning" onClick={() => handleUpdate(magazine.id,updatedMagazineName,updatedMagazineCoverImage)}>Edit</Button> 
                 </form>
                 </Card>
           </li>
