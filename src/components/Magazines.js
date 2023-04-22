@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Card } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import { useParams } from 'react-router-dom';
 
@@ -92,7 +93,9 @@ getMagazines()  // set book to state
     };
     
     return (
-        <div>
+      <div style={{ backgroundImage: 'url(https://cdn.britannica.com/92/191792-050-E1931160/Magazines-display-magazines-Canada-store-Toronto-Ontario.jpg)' }}>
+      <Container className="d-flex justify-content-center">
+      <div style={{ border: '2px solid black', padding: '20px' }}>
         <h1>Magazine</h1>
         <form onSubmit={handleSubmit}>
           <label>
@@ -113,14 +116,14 @@ getMagazines()  // set book to state
           </label>
           <Button type="submit" variant="primary">add</Button>
         </form>
-        <ul>
+        <Row xs={1} md={3} className="g-4">
           {magazines.reverse().map((magazine) => ( //iterates
-            <li key={magazine.id}>
-          <Card style={{ width: '18rem' }}>
+            <Col key={magazine.id}>
+            <Card style={{ width: '18rem' }}>
             <Card.Img src={magazine.CoverImage} alt={magazine.Title} /> 
-            <h2>{magazine.Title}</h2>
-            <p>by {magazine.Author}</p>
-            <p>Publisher: {magazine.Publisher}</p> 
+            <Card.Title>{magazine.Title}</Card.Title>
+            <Card.Text>by {magazine.Author}</Card.Text>
+            <Card.Text> Publisher: {magazine.Publisher}</Card.Text>
             <Button variant="danger" onClick={() => handleDelete(magazine.id)}>Delete</Button> {/*a button to delete the current magazine*/}
             <form onSubmit={handleSubmit}>
             <label>
@@ -136,9 +139,11 @@ getMagazines()  // set book to state
                 <Button variant="warning" onClick={() => handleUpdate(magazine.id,updatedMagazineName,updatedMagazineCoverImage)}>Edit</Button> 
                 </form>
                 </Card>
-          </li>
+            </Col>
           ))}
-        </ul>
+        </Row>
+        </div>
+      </Container>
       </div>
     )
 }

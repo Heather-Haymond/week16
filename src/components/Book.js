@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import  Button  from 'react-bootstrap/Button';
 import  { Card }  from 'react-bootstrap';
+import { Row, Col, Form } from 'react-bootstrap';
 
 // Book component
 export function Book() {
@@ -91,55 +92,75 @@ body: JSON.stringify(newBooks),
 getBooks() //calls the getBooks function to update new data
   };
 
-    return (
-        <div>
-        <h1>Book</h1>
-        <form onSubmit={handleSubmit}> 
-           <label>
-             Add a new Book:
-             <input type="text" value={bookName} onChange={e => setBookName(e.target.value)} />  
-             </label>
-             <label>
-             Author:
-             <input type="text" value={bookAuthor} onChange={e => setBookAuthor(e.target.value)} /> 
-             </label>
-             <label>
-             Publisher:
-             <input type="text" value={bookPublisher} onChange={e => setBookPublisher(e.target.value)} /> 
-             </label>
-             <label>
-             Cover Image URL:
-             <input type="text" value={bookCoverImage} onChange={e => setBookCoverImage(e.target.value)} />
-             </label>
-             <Button type="submit" variant="primary">add</Button> {/*a button to add the new book*/}
-            </form>
-        <ul>
-          {books.reverse().map((book) => ( //iterates over the list of books in reverse order and generates a card for each one
-            <li key={book.id}>
-                <Card style={{ width: '18rem' }}>
-            <Card.Img src={book.CoverImage} alt={book.Title} /> 
-            <h2>{book.Title}</h2>
-            <p>by {book.Author}</p>
-            <p>Publisher: {book.Publisher}</p> 
-            <Button variant="danger" onClick={() => handleDelete(book.id)}>Delete</Button>  {/*a button to delete the current book*/}
-            <form onSubmit={handleSubmit}>
-           <label>
-           <br />Update Book:
-             <input type="text" value={updatedBookName} onChange={e => setUpdatedBookName(e.target.value)} /> <br />
-             Author: 
-             <input type="text" value={bookAuthor} onChange={e => setBookAuthor(e.target.value)} /> <br />
-             Publisher:
-             <input type="text" value={bookPublisher} onChange={e => setBookPublisher(e.target.value)} /> <br />
-             cover Image: 
-             <input type="text" value={updatedBookCoverImage} onChange={e => setUpdatedBookCoverImage(e.target.value)} />
-             </label>
-             <Button variant="warning" onClick={() => handleUpdate(book.id,updatedBookName,updatedBookCoverImage)}>Edit</Button> {/*a button to update the current book*/}
-             </form>
-             </Card>
-          </li>
-          ))}
-        </ul>
-      </div>
+  return (
+    <div>
+      <h1>Book</h1>
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col>
+            <Form.Group controlId="bookName">
+              <Form.Label>Add a new Book:</Form.Label>
+              <Form.Control type="text" value={bookName} onChange={e => setBookName(e.target.value)} />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="bookAuthor">
+              <Form.Label>Author:</Form.Label>
+              <Form.Control type="text" value={bookAuthor} onChange={e => setBookAuthor(e.target.value)} />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="bookPublisher">
+              <Form.Label>Publisher:</Form.Label>
+              <Form.Control type="text" value={bookPublisher} onChange={e => setBookPublisher(e.target.value)} />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="bookCoverImage">
+              <Form.Label>Cover Image URL:</Form.Label>
+              <Form.Control type="text" value={bookCoverImage} onChange={e => setBookCoverImage(e.target.value)} />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Button type="submit" variant="primary">add</Button>
+          </Col>
+        </Row>
+      </Form>
+      <Row>
+        {books.reverse().map((book) => (
+          <Col key={book.id}>
+            <Card style={{ width: '18rem' }}>
+              <Card.Img src={book.CoverImage} alt={book.Title} />
+              <Card.Body>
+                <Card.Title>{book.Title}</Card.Title>
+                <Card.Text>by {book.Author}</Card.Text>
+                <Card.Text>Publisher: {book.Publisher}</Card.Text>
+                <Button variant="danger" onClick={() => handleDelete(book.id)}>Delete</Button>
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group controlId="updatedBookName">
+                    <Form.Label>Update Book:</Form.Label>
+                    <Form.Control type="text" value={updatedBookName} onChange={e => setUpdatedBookName(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group controlId="bookAuthor">
+                    <Form.Label>Author:</Form.Label>
+                    <Form.Control type="text" value={bookAuthor} onChange={e => setBookAuthor(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group controlId="bookPublisher">
+                    <Form.Label>Publisher:</Form.Label>
+                    <Form.Control type="text" value={bookPublisher} onChange={e => setBookPublisher(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group controlId="updatedBookCoverImage">
+                    <Form.Label>Cover Image URL:</Form.Label>
+                    <Form.Control type="text" value={updatedBookCoverImage} onChange={e => setUpdatedBookCoverImage(e.target.value)} />
+                  </Form.Group>
+                  <Button variant="warning" onClick={() => handleUpdate(book.id, updatedBookName, updatedBookCoverImage)}>Edit</Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </div>
     )
 }
         
