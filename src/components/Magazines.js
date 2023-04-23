@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Card } from 'react-bootstrap';
-import { Container, Row, Col } from 'react-bootstrap';
-
-import { useParams } from 'react-router-dom';
+import { Row, Col, Form } from 'react-bootstrap';
 
 //magazine component
 export function Magazines() {
@@ -15,6 +13,8 @@ export function Magazines() {
     const [magazinePublisher, setMagazinePublisher] = useState ('')
     const [magazineCoverImage, setMagazineCoverImage] = useState ('')
     const [updatedMagazineName, setUpdatedMagazineName] = useState ('')
+    const [updatedMagazineAuthor, setUpdatedMagazineAuthor] = useState ('')
+    const [updatedMagazinePublisher, setUpdatedMagazinePublisher] = useState ('')
     const [updatedMagazineCoverImage, setUpdatedMagazineCoverImage] = useState ('')
     // useEffect to fetch magazines from an external API and set them to the state
     useEffect(() => {
@@ -31,11 +31,6 @@ export function Magazines() {
         .catch(error => alert(error));
     }
   
-    // function to add a book to the cart
-    // const handleAddToCart = magazine => {
-    //   setCart(prevCart => [...prevCart, magazine]);
-    // };
-  // function to delete 
   const handleDelete = async (id) => {
     console.log("deletingMagazine...", id)
    const response = await fetch(`https://642725c4161067a83bf6687e.mockapi.io/Magazines/${id}`,{
@@ -44,7 +39,7 @@ export function Magazines() {
     "content-Type": "application/json"
    },
 })
-getMagazines()  // set book to state
+getMagazines()  // set to state
     // setMagazines(prevMagazines => prevMagazines.filter(p => p.id !== id));
   };
   //function that adds magazine to the API
@@ -89,61 +84,72 @@ getMagazines()  // set book to state
     },
     body: JSON.stringify(newMagazines), //converts the new book data into a JSON string and sets it as the body of the request
     });
-    getMagazines() //calls the getBooks function to update new data
+    getMagazines() //calls the get magazines function to update new data
     };
     
     return (
       <div style={{ backgroundImage: 'url(https://cdn.britannica.com/92/191792-050-E1931160/Magazines-display-magazines-Canada-store-Toronto-Ontario.jpg)' }}>
-      <Container className="d-flex justify-content-center">
-      <div style={{ border: '2px solid black', padding: '20px' }}>
-        <h1>Magazine</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Add a new Magazine:
-            <input type="text" value={magazineName} onChange={e => setMagazineName(e.target.value)} />
-          </label>
-          <label>
-          Authors:
-            <input type="text" value={MagazineAuthor} onChange={e => setMagazineAuthor(e.target.value)} /> 
-          </label>
-            <label>
-            Publisher:
-          <input type="text" value={magazinePublisher} onChange={e => setMagazinePublisher(e.target.value)} /> 
-          </label>
-          <label>
-            Cover Image URL:
-            <input type="text" value={magazineCoverImage} onChange={e => setMagazineCoverImage(e.target.value)} /> 
-          </label>
-          <Button type="submit" variant="primary">add</Button>
-        </form>
-        <Row xs={1} md={3} className="g-4">
-          {magazines.reverse().map((magazine) => ( //iterates
-            <Col key={magazine.id}>
-            <Card style={{ width: '18rem' }}>
-            <Card.Img src={magazine.CoverImage} alt={magazine.Title} /> 
-            <Card.Title>{magazine.Title}</Card.Title>
-            <Card.Text>by {magazine.Author}</Card.Text>
-            <Card.Text> Publisher: {magazine.Publisher}</Card.Text>
-            <Button variant="danger" onClick={() => handleDelete(magazine.id)}>Delete</Button> {/*a button to delete the current magazine*/}
-            <form onSubmit={handleSubmit}>
-            <label>
-                Update Title:
-                <input type="text" value={updatedMagazineName} onChange={e => setUpdatedMagazineName(e.target.value)} /> <br />
-                Authors:
-                <input type="text" value={MagazineAuthor} onChange={e => setMagazineAuthor(e.target.value)} /> <br />
-                Publisher:
-                <input type="text" value={magazinePublisher} onChange={e => setMagazinePublisher(e.target.value)} /> <br />
-                cover Image:
-                <input type="text" value={updatedMagazineCoverImage} onChange={e => setUpdatedMagazineCoverImage(e.target.value)} /> <br />
-                </label>
-                <Button variant="warning" onClick={() => handleUpdate(magazine.id,updatedMagazineName,updatedMagazineCoverImage)}>Edit</Button> 
-                </form>
+        <div>
+          <h1>Magazine</h1>
+          <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col>
+                <Form.Group controlId="magazineName">
+                  <Form.Label className="contrast-text">Add a new Magazine:</Form.Label>
+                  <Form.Control type="text" value={magazineName} onChange={e => setMagazineName(e.target.value)} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="magazinePublisher">
+                  <Form.Label>Publisher:</Form.Label>
+                  <Form.Control type="text" value={magazinePublisher} onChange={e => setMagazinePublisher(e.target.value)} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="magazineCoverImage">
+                  <Form.Label>Cover Image URL:</Form.Label>
+                  <Form.Control type="text" value={magazineCoverImage} onChange={e => setMagazineCoverImage(e.target.value)} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Button type="submit" variant="primary">add</Button>
+              </Col>
+            </Row>
+          </Form>
+          <Row>
+            {magazines.reverse().map((magazine) => (
+              <Col key={magazine.id}>
+                <Card style={{ width: '18rem' }}>
+                  <Card.Img src={magazine.CoverImage} alt={magazine.Title} />
+                  <Card.Body>
+                    <Card.Title>{magazine.Title}</Card.Title>
+                    <Card.Text>Publisher: {magazine.Publisher}</Card.Text>
+                    <Button variant="danger" onClick={() => handleDelete(magazine.id)}>Delete</Button>
+                    <Form onSubmit={handleSubmit}>
+                      <Form.Group controlId="updatedMagazineName">
+                        <Form.Label>Update Magazine:</Form.Label>
+                        <Form.Control type="text" value={updatedMagazineName} onChange={e => setUpdatedMagazineName(e.target.value)} />
+                      </Form.Group>
+                      <Form.Group controlId="updatedMagazineAuthor">
+                        <Form.Label>Updated Publisher:</Form.Label>
+                        <Form.Control type="text" value={updatedMagazineAuthor} onChange={e => setUpdatedMagazineAuthor(e.target.value)} />
+                      </Form.Group>
+                      <Form.Group controlId="updatedMagazinePublisher">
+                        <Form.Label>Updated Publisher:</Form.Label>
+                        <Form.Control type="text" value={updatedMagazinePublisher} onChange={e => setUpdatedMagazinePublisher(e.target.value)} />
+                      </Form.Group>
+                      <Form.Group controlId="updatedMagazineCoverImage">
+                        <Form.Label>Cover Image URL:</Form.Label>
+                        <Form.Control type="text" value={updatedMagazineCoverImage} onChange={e => setUpdatedMagazineCoverImage(e.target.value)} />
+                      </Form.Group>
+                      <Button variant="warning" onClick={() => handleUpdate(magazine.id, updatedMagazineName, updatedMagazineCoverImage)}>Edit</Button>
+                    </Form>
+                  </Card.Body>updatedMagazineAuthor
                 </Card>
-            </Col>
-          ))}
-        </Row>
+              </Col>
+            ))}
+          </Row>
         </div>
-      </Container>
       </div>
     )
 }

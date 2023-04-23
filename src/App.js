@@ -17,7 +17,7 @@ export default function App() {
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="#">Reading can shape who you are, so check this out</Navbar.Brand>
+          <Navbar.Brand href="#">Reading can shape who you are, so check us out</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

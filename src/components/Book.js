@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import  Button  from 'react-bootstrap/Button';
 import  { Card }  from 'react-bootstrap';
 import { Row, Col, Form } from 'react-bootstrap';
-
 // Book component
 export function Book() {
     // state variables to store book data and input values
@@ -13,6 +12,9 @@ export function Book() {
     const [bookPublisher, setBookPublisher] = useState ('')
     const [bookCoverImage, setBookCoverImage] = useState ('')
     const [updatedBookName, setUpdatedBookName] = useState ('')
+    const [updatedBookAuthor, setUpdatedBookAuthor] = useState ('')
+    const [updatedBookPublisher, setUpdatedBookPublisher] = useState ('')
+  
     const [updatedBookCoverImage, setUpdatedBookCoverImage] = useState ('')
     // useEffect to fetch books from an external API and set them to the state
     useEffect(() => {
@@ -93,13 +95,14 @@ getBooks() //calls the getBooks function to update new data
   };
 
   return (
+    <div style={{ backgroundImage: 'url(https://static01.nyt.com/images/2017/05/11/t-magazine/bookstore-slide-2MCD/bookstore-slide-2MCD-superJumbo.jpg)' }}>
     <div>
       <h1>Book</h1>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col>
             <Form.Group controlId="bookName">
-              <Form.Label>Add a new Book:</Form.Label>
+            <Form.Label className="contrast-text">Add a new Book:</Form.Label>
               <Form.Control type="text" value={bookName} onChange={e => setBookName(e.target.value)} />
             </Form.Group>
           </Col>
@@ -142,12 +145,12 @@ getBooks() //calls the getBooks function to update new data
                     <Form.Control type="text" value={updatedBookName} onChange={e => setUpdatedBookName(e.target.value)} />
                   </Form.Group>
                   <Form.Group controlId="bookAuthor">
-                    <Form.Label>Author:</Form.Label>
-                    <Form.Control type="text" value={bookAuthor} onChange={e => setBookAuthor(e.target.value)} />
+                    <Form.Label>Update Author:</Form.Label>
+                    <Form.Control type="text" value={updatedBookAuthor} onChange={e => setUpdatedBookAuthor(e.target.value)} />
                   </Form.Group>
                   <Form.Group controlId="bookPublisher">
                     <Form.Label>Publisher:</Form.Label>
-                    <Form.Control type="text" value={bookPublisher} onChange={e => setBookPublisher(e.target.value)} />
+                    <Form.Control type="text" value={updatedBookPublisher} onChange={e => setUpdatedBookPublisher(e.target.value)} />
                   </Form.Group>
                   <Form.Group controlId="updatedBookCoverImage">
                     <Form.Label>Cover Image URL:</Form.Label>
@@ -160,6 +163,7 @@ getBooks() //calls the getBooks function to update new data
           </Col>
         ))}
       </Row>
+    </div>
     </div>
     )
 }
